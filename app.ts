@@ -11,11 +11,13 @@ import mongodb = require('mongodb');
 import Promise = require('bluebird');
 var MongoClient = <mongodb.MongoClientAsync>Promise.promisifyAll(require('mongodb').MongoClient);
 var console = process['console'];
+global['MongoDatabase'] = null;
 
 var app = express();
 
 // database
 MongoClient.connectAsync(config.get<string>('db.uri')).then((db) => {
+  MongoDatabase = db;
   console.tag('server').time().log('Connected correctly to database');
 }).catch((err) => {
   console.tag('server').time().error('An error occured when connecting to database.').error(err);

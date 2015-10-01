@@ -51,8 +51,8 @@ declare module "mongodb" {
     findAsync(selector?: Object, fields?: any, options?: CollectionFindOptions): Promise<Cursor>;
     findAsync(selector: Object, fields: any, skip: number, limit: number, timeout?: number): Promise<Cursor>;
 
-    findOneAsync(selector: Object, fields?: any, options?: CollectionFindOptions): Promise<Cursor>;
-    findOneAsync(selector: Object, fields: any, skip: number, limit: number, timeout?: number): Promise<Cursor>;
+    findOneAsync(selector: Object, fields?: any, options?: CollectionFindOptions): Promise<any>;
+    findOneAsync(selector: Object, fields: any, skip: number, limit: number, timeout?: number): Promise<any>;
   }
 
   // Class documentation : http://mongodb.github.io/node-mongodb-native/api-generated/cursor.html
