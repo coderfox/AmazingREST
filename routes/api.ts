@@ -28,7 +28,7 @@ router.post('/:collection', function(req, res, next) {
   var doc = req.body;
   var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
   collection.insertOneAsync(doc).done((result) => {
-    res.json(doc);
+    res.location('/api/' + req.params['collection'] + '/' + doc._id).status(201).json(doc);
   }, (err) => {
       console.tag('server').time().error('An error occured when querying.').error(err.message);
       next(err);
@@ -38,7 +38,13 @@ router.post('/:collection', function(req, res, next) {
 router.get('/:collection/:id', function(req, res, next) {
   var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
   collection.findOneAsync({ "_id": new mongodb.ObjectID(req.params['id']) }).then((doc) => {
-    res.json(doc);
+    if (doc) {
+      res.json(doc);
+    } else {
+      var err = new Error('Document not existing!');
+      err['status'] = 404;
+      throw err;
+    }
   }).catch((err) => {
     console.tag('server').time().error('An error occured when querying.').error(err.message);
     next(err);
@@ -51,7 +57,9 @@ router.put('/:collection/:id', function(req, res, next) {
     if (doc.value) {
       res.json(doc);
     } else {
-      throw new Error('Document not existing!');
+      var err = new Error('Document not existing!');
+      err['status'] = 404;
+      throw err;
     }
   }).catch((err) => {
     console.tag('server').time().error('An error occured when querying.').error(err.message);
@@ -65,7 +73,9 @@ router.delete('/:collection/:id', function(req, res, next) {
     if (doc.value) {
       res.json(doc);
     } else {
-      throw new Error('Document not existing!');
+      var err = new Error('Document not existing!');
+      err['status'] = 404;
+      throw err;
     }
   }).catch((err) => {
     console.tag('server').time().error('An error occured when querying.').error(err.message);
