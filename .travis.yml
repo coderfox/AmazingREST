@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "0.11"
+  - "0.10"
+  - "iojs"
+services:
+  - mongodb
+install:
+  - npm install -g jake tsd typescript mocha chai
+  - jake
+script:
+  - jake test
+cache:
+  - node_modules
+  - typings

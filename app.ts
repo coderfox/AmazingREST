@@ -4,12 +4,9 @@
 import express = require('express');
 import path = require('path');
 import favicon = require('serve-favicon');
-import logger = require('morgan');
 import cookieParser = require('cookie-parser');
 import bodyParser = require('body-parser');
-var config = require('config');
-var _log = require('log');
-global['log'] = new _log(config.get('server.log'));
+import config = require('config');
 
 var app = express();
 
@@ -18,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(logger('dev'));
+  app.use(scribe.express.logger());
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
