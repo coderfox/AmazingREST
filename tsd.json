@@ -41,13 +41,13 @@
     "chai/chai.d.ts": {
       "commit": "0a51ae619b1729429892d1d0d25ec4476f88cad2"
     },
-    "q/Q.d.ts": {
-      "commit": "6f6e5c7dd9effe21fee14eb65fe340ecbbc8580a"
-    },
     "mongodb/mongodb.d.ts": {
       "commit": "386e1708b9e5cb0d798c63ac43b5d0fc8d0f9bfd"
     },
     "config/config.d.ts": {
+      "commit": "386e1708b9e5cb0d798c63ac43b5d0fc8d0f9bfd"
+    },
+    "bluebird/bluebird.d.ts": {
       "commit": "386e1708b9e5cb0d798c63ac43b5d0fc8d0f9bfd"
     }
   }

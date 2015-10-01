@@ -7,8 +7,20 @@ import favicon = require('serve-favicon');
 import cookieParser = require('cookie-parser');
 import bodyParser = require('body-parser');
 import config = require('config');
+import mongodb = require('mongodb');
+import Promise = require('bluebird');
+var MongoClient: any = Promise.promisifyAll(require("mongodb").MongoClient);
+var console = process['console'];
 
 var app = express();
+
+// database
+MongoClient.connectAsync(config.get<string>('db.uri')).then((db) => {
+  console.tag('server').time().log('Connected correctly to database');
+}).catch((err) => {
+  console.tag('server').time().error(err);
+  process.exit(1);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
