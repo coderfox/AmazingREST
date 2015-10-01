@@ -1,13 +1,15 @@
-/// <reference path="../referrences.d.ts"/>
+/// <reference path="../references.d.ts"/>
 
 import express = require('express');
 var config = require('config');
 
 var router = express.Router();
 
-/* GET home page. */
+// GET /
 router.get('/', function(req, res, next) {
   res.render('index', { title: "AmazingREST" });
 });
+// /api
+router.use('/api', require('./api'));
 
 export = router;
