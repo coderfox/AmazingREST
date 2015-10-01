@@ -19,7 +19,7 @@ router.get('/:collection', function(req, res, next) {
   }).then((docs) => {
     res.json(docs);
   }).catch((err) => {
-    console.tag('server').time().error('An error occured when querying.').error(err);
+    console.tag('server').time().error('An error occured when querying.').error(err.message);
     next(err);
   });
 });
@@ -30,7 +30,7 @@ router.post('/:collection', function(req, res, next) {
   collection.insertOneAsync(doc).done((result) => {
     res.json(doc);
   }, (err) => {
-      console.tag('server').time().error('An error occured when querying.').error(err);
+      console.tag('server').time().error('An error occured when querying.').error(err.message);
       next(err);
     });
 });
@@ -40,7 +40,7 @@ router.get('/:collection/:id', function(req, res, next) {
   collection.findOneAsync({ "_id": new mongodb.ObjectID(req.params['id']) }).then((doc) => {
     res.json(doc);
   }).catch((err) => {
-    console.tag('server').time().error('An error occured when querying.').error(err);
+    console.tag('server').time().error('An error occured when querying.').error(err.message);
     next(err);
   });
 });
@@ -48,11 +48,27 @@ router.get('/:collection/:id', function(req, res, next) {
 router.put('/:collection/:id', function(req, res, next) {
   var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
   collection.findOneAndUpdateAsync({ "_id": new mongodb.ObjectID(req.params['id']) }, req.body).then((doc) => {
-    res.json({
-      previous: doc.value
-    });
+    if (doc.value) {
+      res.json(doc);
+    } else {
+      throw new Error('Document not existing!');
+    }
   }).catch((err) => {
-    console.tag('server').time().error('An error occured when querying.').error(err);
+    console.tag('server').time().error('An error occured when querying.').error(err.message);
+    next(err);
+  });
+});
+// DEELTE /:collection/:id
+router.delete('/:collection/:id', function(req, res, next) {
+  var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
+  collection.findOneAndDeleteAsync({ "_id": new mongodb.ObjectID(req.params['id']) }).then((doc) => {
+    if (doc.value) {
+      res.json(doc);
+    } else {
+      throw new Error('Document not existing!');
+    }
+  }).catch((err) => {
+    console.tag('server').time().error('An error occured when querying.').error(err.message);
     next(err);
   });
 });
