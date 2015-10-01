@@ -23,8 +23,8 @@ router.get('/:collection', function(req, res, next) {
     next(err);
   });
 });
-// PUT /:collection
-router.put('/:collection', function(req, res, next) {
+// POST /:collection
+router.post('/:collection', function(req, res, next) {
   var doc = req.body;
   var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
   collection.insertOneAsync(doc).done((result) => {
@@ -39,6 +39,18 @@ router.get('/:collection/:id', function(req, res, next) {
   var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
   collection.findOneAsync({ "_id": new mongodb.ObjectID(req.params['id']) }).then((doc) => {
     res.json(doc);
+  }).catch((err) => {
+    console.tag('server').time().error('An error occured when querying.').error(err);
+    next(err);
+  });
+});
+// PUT /:collection/:id
+router.put('/:collection/:id', function(req, res, next) {
+  var collection = <mongodb.CollectionAsync>Promise.promisifyAll(MongoDatabase.collection(req.params['collection']));
+  collection.findOneAndUpdateAsync({ "_id": new mongodb.ObjectID(req.params['id']) }, req.body).then((doc) => {
+    res.json({
+      previous: doc.value
+    });
   }).catch((err) => {
     console.tag('server').time().error('An error occured when querying.').error(err);
     next(err);
