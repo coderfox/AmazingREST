@@ -21,8 +21,10 @@
     "files": [
         "./app.ts",
         "./references.d.ts",
+        "./routes/api.ts",
         "./routes/index.ts",
         "./test/_server.ts",
+        "./tsd/mongodb.d.ts",
         "./typings/bluebird/bluebird.d.ts",
         "./typings/body-parser/body-parser.d.ts",
         "./typings/chai/chai.d.ts",

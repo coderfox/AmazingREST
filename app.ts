@@ -9,7 +9,7 @@ import bodyParser = require('body-parser');
 import config = require('config');
 import mongodb = require('mongodb');
 import Promise = require('bluebird');
-var MongoClient: any = Promise.promisifyAll(require("mongodb").MongoClient);
+var MongoClient = <mongodb.MongoClientAsync>Promise.promisifyAll(require('mongodb').MongoClient);
 var console = process['console'];
 
 var app = express();
@@ -18,7 +18,7 @@ var app = express();
 MongoClient.connectAsync(config.get<string>('db.uri')).then((db) => {
   console.tag('server').time().log('Connected correctly to database');
 }).catch((err) => {
-  console.tag('server').time().error(err);
+  console.tag('server').time().error('An error occured when connecting to database.').error(err);
   process.exit(1);
 });
 
