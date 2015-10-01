@@ -4,21 +4,32 @@
 import express = require('express');
 import path = require('path');
 import favicon = require('serve-favicon');
-import logger = require('morgan');
 import cookieParser = require('cookie-parser');
 import bodyParser = require('body-parser');
-var config = require('config');
-var _log = require('log');
-global['log'] = new _log(config.get('server.log'));
+import config = require('config');
+import mongodb = require('mongodb');
+import Promise = require('bluebird');
+var MongoClient = <mongodb.MongoClientAsync>Promise.promisifyAll(require('mongodb').MongoClient);
+var console = process['console'];
+global['MongoDatabase'] = null;
 
 var app = express();
+
+// database
+MongoClient.connectAsync(config.get<string>('db.uri')).then((db) => {
+  MongoDatabase = db;
+  console.tag('server').time().log('Connected correctly to database');
+}).catch((err) => {
+  console.tag('server').time().error('An error occured when connecting to database.').error(err);
+  process.exit(1);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(logger('dev'));
+  app.use(scribe.express.logger());
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,7 +59,10 @@ app.use((req, res, next) => {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use('/api', (err: any, req: express.Request, res: express.Response, next: Function) => {
-    res.status(err['status'] || 500).json(err);
+    res.status(err['status'] || 500).json({
+      message: err.message,
+      error: err
+    });
   });
   app.use((err: any, req, res, next) => {
     res.status(err['status'] || 500);

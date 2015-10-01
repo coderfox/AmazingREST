@@ -1,4 +1,4 @@
 db:
   uri: mongodb://localhost/AmazingREST
 server:
-  log: debug
+  port: 3000
