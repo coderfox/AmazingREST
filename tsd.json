@@ -1,0 +1,60 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "express/express.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "mime/mime.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "node/node.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "jake/jake.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "debug/debug.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "body-parser/body-parser.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "cookie-parser/cookie-parser.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "morgan/morgan.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "serve-favicon/serve-favicon.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "a1226afe5c4ab96610e088d970eb4f8537b1d116"
+    },
+    "request/request.d.ts": {
+      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
+    },
+    "form-data/form-data.d.ts": {
+      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
+    },
+    "chai/chai.d.ts": {
+      "commit": "0a51ae619b1729429892d1d0d25ec4476f88cad2"
+    },
+    "q/Q.d.ts": {
+      "commit": "6f6e5c7dd9effe21fee14eb65fe340ecbbc8580a"
+    },
+    "mongodb/mongodb.d.ts": {
+      "commit": "386e1708b9e5cb0d798c63ac43b5d0fc8d0f9bfd"
+    },
+    "config/config.d.ts": {
+      "commit": "386e1708b9e5cb0d798c63ac43b5d0fc8d0f9bfd"
+    }
+  }
+}
