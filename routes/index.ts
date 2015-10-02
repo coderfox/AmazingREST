@@ -11,5 +11,7 @@ router.get('/', function(req, res, next) {
 });
 // /api
 router.use('/api', require('./api'));
+// /logs
+router.use('/log', scribe.webPanel());
 
 export = router;

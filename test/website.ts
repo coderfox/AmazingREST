@@ -5,8 +5,8 @@ import chai = require('chai');
 var expect = chai.expect;
 var request: any = Promise.promisifyAll(require('request'));
 
-describe('server', function() {
-  describe('start', function() {
+describe('website', function() {
+  describe('/', function() {
     before(function() {
       require('../bin/www');
     });

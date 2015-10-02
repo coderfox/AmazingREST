@@ -18,7 +18,7 @@ var app = express();
 // database
 MongoClient.connectAsync(config.get<string>('db.uri')).then((db) => {
   MongoDatabase = db;
-  console.tag('server').time().log('Connected correctly to database');
+  console.tag('server').time().info('Connected correctly to database');
 }).catch((err) => {
   console.tag('server').time().error('An error occured when connecting to database.').error(err);
   process.exit(1);
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // allow remote requests
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', '*');
-  res.header('Access-Control-Allow-Origin', req.headers['origin']);
+  res.header('Access-Control-Allow-Origin', req.headers['origin'] || '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();

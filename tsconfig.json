@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0-beta",
+    "version": "1.6.2",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -23,7 +23,9 @@
         "./references.d.ts",
         "./routes/api.ts",
         "./routes/index.ts",
-        "./test/_server.ts",
+        "./test/__init__.ts",
+        "./test/api.ts",
+        "./test/website.ts",
         "./tsd/mongodb.d.ts",
         "./typings/bluebird/bluebird.d.ts",
         "./typings/body-parser/body-parser.d.ts",
